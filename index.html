@@ -1209,6 +1209,29 @@
                     </div>
                 </div>
             </div>
+            <div class="card mb-3">
+                <div class="card-header bg-custom text-white">Payment info</div>
+                <div class="card-content form-group">
+                    <div class="d-flex flex-row flex-wrap align-content-center justify-content-start my-3">
+                        <div class="w-50 p-3">
+                            <label for="">Payment Type</label> <br>
+                            <select name="" class="form-control" id="paymentSelect">
+                                <option value="0">Select payment type</option>
+                                <option value="checkSelect">Bank Check</option>
+                                <option value="bkashSelect">Bkash</option>
+                            </select>
+                        </div>
+                        <div class="w-50 p-3" id="bkash_trnx" style="display: none;">
+                            <label for="">Transaction Id</label> <br>
+                            <input type="text" class="form-control" placeholder="Trxn Id">
+                        </div>
+                        <div class="w-50 p-3" id="check_photo" style="display: none;">
+                            <label for="">Clear photo of your check</label>
+                            <input type="file" class="form-control-file border">
+                        </div>
+                    </div>
+                </div>
+            </div>
             <div class="d-flex align-items-center justify-content-center">
                 <button class="btn btn-outline-primary" type="submit">Submit</button>
             </div>
@@ -1264,6 +1287,27 @@
     function closeCompanyDiv(id) {
         $("#field_close" + id).remove();
     }
+
+    //Dynamic select payment
+    $(document).ready(function() {
+        $("#paymentSelect").change(function() {
+            var selected = $(this).children(":selected").text();
+            switch (selected) {
+                case "Bank Check":
+                    $("#bkash_trnx").hide();
+                    $("#check_photo").show();
+                    break;
+                case "Bkash":
+                    $("#check_photo").hide();
+                    $("#bkash_trnx").show();
+                    break;
+
+                default:
+                    $("#check_photo").hide();
+                    $("#bkash_trnx").hide();
+            }
+        });
+    });
     </script>
 </body>
 
